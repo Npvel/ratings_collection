@@ -31,10 +31,21 @@ from io import BytesIO
 
 # chromedriver = webdriver.Chrome(ChromeDriverManager().install())
 chromeOptions = webdriver.ChromeOptions()
-prefs = {"download.default_directory" : "C:\Projects\selena\proccesed_files"}
-chromeOptions.add_experimental_option("prefs",prefs)
-chromedriver = r"C:\Projects\rating_for_cb\projects\drivers\chromedriver_win32\chromedriver"
-browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
+chromeOptions = webdriver.ChromeOptions()
+chromeOptions.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chromeOptions.add_argument("--headless")
+chromeOptions.add_argument("--disable-dev-shm-usage")
+chromeOptions.add_argument("--no-sandbox")
+browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chromeOptions)
+
+
+
+
+#LOCAL RUN
+# prefs = {"download.default_directory" : "C:\Projects\selena\proccesed_files"}
+# chromeOptions.add_experimental_option("prefs",prefs)
+# chromedriver = r"C:\Projects\rating_for_cb\projects\drivers\chromedriver_win32\chromedriver"
+# browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
 wait = WebDriverWait(browser, 10)
 
